@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
 
 function TodoForm(props) {
-  const { addTodo , itemUpdate, updateTodo} = props;
+  const { addTodo, itemUpdate, updateTodo } = props;
   const [name, setName] = useState("");
-  const [id, setId] = useState("")
-  
-  useEffect(() => {
-     setName(itemUpdate.name)
-     setId(itemUpdate.id)
-     
-  }, [itemUpdate])
-  const handleClickAdd = () => {
-      if(id){
-          updateTodo(id, name)
-         
-      }
-      else{
-          addTodo(name);
+  const [id, setId] = useState("");
 
-      }
-    setName("")
-    setId("")
+  useEffect(() => {
+    if (itemUpdate) {
+      setName(itemUpdate.name);
+      setId(itemUpdate.id);
+    }
+  }, [itemUpdate]);
+  const handleClickAdd = () => {
+    if (id) {
+      updateTodo(id, name);
+    } else {
+      addTodo(name);
+    }
+    setName("");
+    setId("");
   };
   const handleChangeValue = (e) => {
     setName(e.target.value);
@@ -37,7 +35,7 @@ function TodoForm(props) {
           value={name}
         />
         <button className="btn" onClick={handleClickAdd}>
-         {id ? "Update" : "Add"}
+          {id ? "Update" : "Add"}
         </button>
       </div>
     </div>
